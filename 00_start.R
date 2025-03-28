@@ -3,9 +3,15 @@ pacman::p_load( lidR, terra, sf, doParallel, foreach)
 
 
 ## change these two lines below
-inputdir <- "C:/Users/erico.kutchartt/OneDrive - Generalitat de Catalunya/Escritorio/full10km2551"
-outputdir <- "C:/Users/erico.kutchartt/OneDrive - Generalitat de Catalunya/Escritorio/full10km2551_output"
+inputdir <- "input"
+outputdir <- "output"
+dtm  <- file.path("Digital Terrain Model 5m 2020.tif")
 if(!dir.exists(outputdir))  dir.create(outputdir)
+
+dtm.r <- terra::rast(dtm)
+
+# check dtm is good
+print(dtm.r)
 
 ## list of laz files using also subfolder
 laz.files<-list.files(inputdir,
