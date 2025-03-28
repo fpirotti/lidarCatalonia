@@ -8,7 +8,7 @@ outputdir <- "output"
 dtm  <- file.path("Digital Terrain Model 5m 2020.tif")
 if(!dir.exists(outputdir))  dir.create(outputdir)
 
-dtm.r <- terra::rast(dtm)
+dtm <- terra::rast("/vsicurl/https://datacloud.icgc.cat/datacloud/met5_ETRS89/mosaic/met5_catalunya_2020.tif")
 
 # check dtm is good
 print(dtm.r)
