@@ -53,12 +53,19 @@ output.clean <- catalog_apply(ctg, cleanCloud, .options = opt)
 ctg_clean <- lidR::readLAScatalog( unlist(output.clean))
 opt_output_files(ctg_clean) <- file.path(outputdir, "{*}_classified")
 
-mycsf01 <- csf(TRUE, 1, 1, time_step = 1)
-ctg_classified <- classify_ground(ctg_clean, mycsf)
+mycsfs = list(
+  mycsf01 = csf(TRUE, 1, 1),
+  mycsf02 = csf(TRUE, 0.2, 1),
+  mycsf03 = csf(TRUE, 0.2, 0.5)
+)
 
-
-opt_output_files(ctg_classified) <- file.path(outputdir, "{*}_dtm_mycsf01")
-dtm <- rasterize_terrain(ctg_classified, 1, tin())
+for(nm in names(mycsfs)){
+  myc = mycsfs[[nm]]
+  message("doing",  sprintf(" {*}_dtm_%s", nm) )
+  ctg_classified <- classify_ground(ctg_clean, myc)
+  opt_output_files(ctg_classified) <- file.path(outputdir, sprintf("{*}_dtm_%s", nm) )
+  dtm <- rasterize_terrain(ctg_classified, 1, tin())
+}
 
 
 
