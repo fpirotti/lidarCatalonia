@@ -3,12 +3,12 @@ pacman::p_load( lidR, terra, sf, doParallel, foreach)
 
 
 ## change these two lines below
-inputdir <- "input"
+inputdir <- "input/plots_pilotareas_lidardata/"
 outputdir <- "output"
 
 if(!dir.exists(outputdir))  dir.create(outputdir)
 
-dtm <- terra::rast("/vsicurl/https://datacloud.icgc.cat/datacloud/met5_ETRS89/mosaic/met5_catalunya_2020.tif")
+# dtm <- terra::rast("/vsicurl/https://datacloud.icgc.cat/datacloud/met5_ETRS89/mosaic/met5_catalunya_2020.tif")
 
 # check dtm is good
 print(dtm)
@@ -23,7 +23,7 @@ laz.files<-list.files(inputdir,
 # las <- lidR::readLAS(laz.files[[1]])
 
 ctg  <- lidR::readLAScatalog(laz.files)
-
+plot(ctg)
 cleanCloud <- function(lasin, ws)
 {
   las <- lidR::readLAS(lasin)
