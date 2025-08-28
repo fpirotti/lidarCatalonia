@@ -38,7 +38,7 @@ createDTM <- function(inputdir, outputdir, crs="EPGS:4326", limit=Inf,res=1, pat
 
   ## here you tell lidr how to call the outputs from the next line
   opt_chunk_size(ctg) <- 0         # in meters
-  opt_chunk_buffer(ctg) <- 0        # prevents edge effects
+  opt_chunk_buffer(ctg) <- 30        # prevents edge effects
   opt_output_files(ctg) <- file.path(outputdir, "DTM_{ORIGINALFILENAME}")  # output file template
   opt_progress(ctg) <- TRUE
   opt_merge(ctg) <- FALSE
